@@ -1,8 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from 'react'
+import App from './App'
+import { render } from '@testing-library/react'
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe("Random user app", () => {
+  it("render user 1 on the screen", () => {
+    const { getByText } = render(<App />)
+
+    expect(getByText(/user 1\b/i)).toBeInTheDocument();
+  })
+})

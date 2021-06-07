@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react'
 import './App.css';
+import { getUsers } from './services/users'
 
 function App() {
+
+  const [user, setUser] = useState([])
+
+  const resetCallApi = () => {
+    getUsers().then(setUser)
+    console.log(user)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        {user.map((x) => (
+          <div key={x.name.first}>
+            <p>Name: {x.name.first} {x.name.last}</p>
+            <p>Gender: {x.gender}</p>
+          </div>
+
+        ))}
+        <button onClick={resetCallApi}>Reset</button>
+      </div>
+
     </div>
   );
 }
